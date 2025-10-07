@@ -9,6 +9,7 @@ import {
 import LayOut from "/src/shared/LayOut";
 import Home from "./pages/Home";
 import About from "./pages/About";
+import Favorites from "./pages/Favorites";
 
 function App() {
   return (
