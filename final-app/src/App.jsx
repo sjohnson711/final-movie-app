@@ -13,15 +13,17 @@ import Favorites from "./pages/Favorites";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route element={<LayOut />}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="favorites" element={<Favorites />} />
-        </Route>
-      </Routes>
-    </Router>
+    <div className="App">
+      <Router>
+        <Routes>
+          <Route element={<LayOut />}>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="favorites" element={<Favorites />} />
+          </Route>
+        </Routes>
+      </Router>
+    </div>
   );
 }
 
