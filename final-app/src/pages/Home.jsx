@@ -1,3 +1,9 @@
+import MoodSelector from "../features/moodSelector/MoodSelector.jsx";
+
 export default function Home() {
-  return <h1>This is home</h1>;
+  return (
+    <div>
+      <MoodSelector />
+    </div>
+  );
 }
