@@ -7,3 +7,5 @@ const H1 = styled.h1`
 export default function About() {
   return <H1>This is the About page</H1>;
 }
+
+
