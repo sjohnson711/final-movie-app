@@ -13,7 +13,7 @@ const Button = styled.button`
   
    &:hover{
     color: red;
-    background: bleach;
+    background: #ff9900;
   
 
   .selected {
