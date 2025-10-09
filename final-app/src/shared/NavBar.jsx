@@ -1,14 +1,34 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+const Header = styled.header`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  padding: 10px 0;
+  width: auto;
+  background: #ccccff;
+`;
+
+const Nav = styled.nav`
+  gap: 20px;
+  display: flex;
+  justify-content: space-evenly;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
+`;
+
 export default function NavBar() {
   return (
-    <header>
-      <nav className="nav-container">
+    <Header>
+      <Nav>
         <Link to="/">Home</Link>
         <Link to="/about">About</Link>
         <Link to="/favorites">Favorites</Link>
-      </nav>
-    </header>
+      </Nav>
+    </Header>
   );
 }

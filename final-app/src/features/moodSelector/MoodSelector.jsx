@@ -13,11 +13,12 @@ const Button = styled.button`
   
    &:hover{
     color: red;
+    background: bleach;
   
 
-  &.selected {
+  .selected {
     border-color: #ff9900;
-    background-color: #fff3e0;
+    background-color: teal;
   
 `;
 
