@@ -22,6 +22,7 @@ const Main = styled.main`
   justify-context: center;
   text-align: center;
   margin: auto;
+  margin-bottom: 400px;
 `;
 
 export default function LayOut() {
