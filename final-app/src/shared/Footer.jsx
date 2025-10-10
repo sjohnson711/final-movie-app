@@ -4,12 +4,13 @@ const FooterContainer = styled.div`
   background-color: #ccccff;
   height: 100px;
   width: 100%;
+  text-align: center;
 `;
 
 export default function Footer() {
   return (
     <FooterContainer>
-      <h1>This is the footer</h1>
+      <h1>Hello</h1>
     </FooterContainer>
   );
 }
