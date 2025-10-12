@@ -13,7 +13,6 @@ export default function MovieList() {
     display: flex;
     flex-direction: rows;
     max-width: 400px;
-    text-align: center;
   `;
 
   const Image = styled.img`
@@ -23,16 +22,20 @@ export default function MovieList() {
 
   return (
     <MovieCard>
-      {certMovies.map((movie) => {
-        return (
-          <>
-            <Image src={movie.poster_path} />
-            <li style={{ listStyle: "none" }} key={movie.id}>
-              {movie.title}
-            </li>
-          </>
-        );
-      })}
+      {certMovies ? (
+        certMovies.map((movie) => {
+          return (
+            <>
+              <Image src={movie.poster_path} />
+              <li style={{ listStyle: "none" }} key={movie.id}>
+                {movie.title}
+              </li>
+            </>
+          );
+        })
+      ) : (
+        <h1>"No movies listed"</h1>
+      )}
     </MovieCard>
   );
 }
