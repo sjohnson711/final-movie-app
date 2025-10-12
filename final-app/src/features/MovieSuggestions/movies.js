@@ -9,6 +9,7 @@ export const movies = [
     vote_average: 8.3,
     poster_path:
       "https://image.tmdb.org/t/p/w500/1g0dhYtq4irTY1GPXvft6k4YLjm.jpg",
+    mood: "excited",
   },
   {
     id: 2,
@@ -19,6 +20,7 @@ export const movies = [
     vote_average: 8.2,
     poster_path:
       "https://image.tmdb.org/t/p/w500/74xTEgt7R36Fpooo50r9T25onhq.jpg",
+    mood: "excited",
   },
   {
     id: 3,
@@ -29,6 +31,7 @@ export const movies = [
     vote_average: 7.5,
     poster_path:
       "https://image.tmdb.org/t/p/w500/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg",
+    mood: "happy",
   },
   {
     id: 4,
@@ -39,6 +42,7 @@ export const movies = [
     vote_average: 7.8,
     poster_path:
       "https://image.tmdb.org/t/p/w500/t6HIqrRAclMCA60NsSmeqe9RmNV.jpg",
+    mood: "happy",
   },
   {
     id: 5,
@@ -48,5 +52,6 @@ export const movies = [
     vote_average: 8.4,
     poster_path:
       "https://image.tmdb.org/t/p/w500/62HCnUTziyWcpDaBO2i1DX17ljH.jpg",
+    mood: "inspired",
   },
 ];
