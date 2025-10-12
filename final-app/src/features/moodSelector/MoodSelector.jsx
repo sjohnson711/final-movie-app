@@ -39,6 +39,15 @@ const MovieCard = styled.div`
   text-align: center;
 `;
 
+const EmptyState = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+  margin-top: 20px;
+  text-align: center;
+`;
+
 const Image = styled.img`
   height: 200px;
   width: 200px;
@@ -82,8 +91,7 @@ export default function MoodSelector() {
           ))}
         </MovieCard>
       )}
-      {movieList.length === 0 && <h1>Server down...💻</h1>}{" "}
-      {/*This message will display if something wrong with fetching the data*/}
+      {movieList.length === 0 && <EmptyState>No movies Found</EmptyState>}
     </div>
   );
 }

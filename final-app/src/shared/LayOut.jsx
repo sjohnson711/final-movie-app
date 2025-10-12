@@ -5,14 +5,18 @@ import styled from "styled-components";
 
 const Body = styled.div`
   min-height: 100vh;
-  
   font-family: monospace;
   background-color: black;
   color: white;
   flex-direction: column;
   display: flex;
-
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+    width: 0;
+    height: 0;
   }
+  scrollbar-width: none;
 `;
 
 const Main = styled.main`
