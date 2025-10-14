@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { moods } from "./MoodData";
 import { movies } from "../MovieSuggestions/movies";
@@ -58,13 +58,20 @@ const Input = styled.input`
   padding: 4px;
   font-family: monospace;
   border-radius: 8px;
-  width: auto;
+  width: 300px;
+  margin-top: 50px;
+
+  &::placeholder {
+    color: lightpurple;
+    opacity: 0.5;
+  }
 `;
 
 export default function MoodSelector() {
   const [movieList, setMovieList] = useState([]); //receives the movie list
   const [selectedMood, setSelectedMood] = useState(null);
   const [userSelect, setUserSelect] = useState("");
+  const [matchingMovie, setMatchingMovie] = useState(null);
 
   console.log(userSelect);
 
@@ -75,7 +82,7 @@ export default function MoodSelector() {
   }
 
   function handleOnchange(event) {
-    setUserSelect(event.target.value);
+    setUserSelect(event.target.value); //userinput
   }
 
   function onSubmit(event) {
@@ -84,17 +91,18 @@ export default function MoodSelector() {
     setUserSelect(userSelect);
   }
 
-  const firstLetterOfInput = userSelect[0].toLowerCase(); //need to address this in the morning
-  function findMatchOfInput() {
-    for (let i = 0; i < movies.length; i++) {
-      const firstLetter = movies[i].charAt(0).toLowerCase();
-
-      if (firstLetter === firstLetterOfInput) {
-        console.log("seth");
-      }
+  useEffect(() => {
+    if (!userSelect) {
+      setMatchingMovie([]); //prevents error/edge case
+      return;
     }
-  }
-  findMatchOfInput();
+
+    const firstLetterOfInput = userSelect[0].toLowerCase();
+    const result = movies.filter((movie) => {
+      return movie.title[0].toLowerCase() === firstLetterOfInput;
+    });
+    setMatchingMovie(result);
+  }, [userSelect]);
 
   return (
     <div className="mood-container-button">
@@ -134,19 +142,25 @@ export default function MoodSelector() {
           onChange={handleOnchange}
           placeholder="search for movie..."
         />
+        {/**disable button if nothing is in input */}
         <span>
           <button disabled={userSelect === "" ? true : false}>Search</button>
         </span>
       </form>
-      {userSelect.charAt(0).toLowerCase() === movies.title
-        ? movieList.filter((movie) => (
-            <MovieCard>
+      {userSelect ? (
+        matchingMovie && matchingMovie.length > 0 ? ( //if movie matches first letter for both user input and movie display below:
+          <MovieCard>
+            {matchingMovie.map((movie) => (
               <MovieItem key={movie.id}>
                 <Image src={movie.poster_path} alt={movie.title} />
+                <p>{movie.title}</p>
               </MovieItem>
-            </MovieCard>
-          ))
-        : "none"}
+            ))}
+          </MovieCard>
+        ) : (
+          <EmptyState>No movies found</EmptyState>
+        )
+      ) : null}
     </div>
   );
 }
