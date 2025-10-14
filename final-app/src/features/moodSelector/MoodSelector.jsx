@@ -54,15 +54,47 @@ const Image = styled.img`
   border-radius: 8px;
 `;
 
+const Input = styled.input`
+  padding: 4px;
+  font-family: monospace;
+  border-radius: 8px;
+  width: auto;
+`;
+
 export default function MoodSelector() {
   const [movieList, setMovieList] = useState([]); //receives the movie list
   const [selectedMood, setSelectedMood] = useState(null);
+  const [userSelect, setUserSelect] = useState("");
+
+  console.log(userSelect);
 
   function handleMoodClick(moodName) {
     setSelectedMood(moodName);
     const filtered = movies.filter((movie) => movie.mood === moodName); //if movie mood matches the mood name display
     setMovieList(filtered);
   }
+
+  function handleOnchange(event) {
+    setUserSelect(event.target.value);
+  }
+
+  function onSubmit(event) {
+    //prevent refresh and also saved user input into state
+    event.preventDefault();
+    setUserSelect(userSelect);
+  }
+
+  const firstLetterOfInput = userSelect[0].toLowerCase(); //need to address this in the morning
+  function findMatchOfInput() {
+    for (let i = 0; i < movies.length; i++) {
+      const firstLetter = movies[i].charAt(0).toLowerCase();
+
+      if (firstLetter === firstLetterOfInput) {
+        console.log("seth");
+      }
+    }
+  }
+  findMatchOfInput();
 
   return (
     <div className="mood-container-button">
@@ -92,6 +124,29 @@ export default function MoodSelector() {
         </MovieCard>
       )}
       {movieList.length === 0 && <EmptyState>No movies Found</EmptyState>}
+      <form onSubmit={onSubmit}>
+        <Input
+          name="user-input"
+          className="user=input"
+          autoComplete="off"
+          type="text"
+          value={userSelect}
+          onChange={handleOnchange}
+          placeholder="search for movie..."
+        />
+        <span>
+          <button disabled={userSelect === "" ? true : false}>Search</button>
+        </span>
+      </form>
+      {userSelect.charAt(0).toLowerCase() === movies.title
+        ? movieList.filter((movie) => (
+            <MovieCard>
+              <MovieItem key={movie.id}>
+                <Image src={movie.poster_path} alt={movie.title} />
+              </MovieItem>
+            </MovieCard>
+          ))
+        : "none"}
     </div>
   );
 }
