@@ -99,7 +99,7 @@ export default function MoodSelector() {
 
     const firstLetterOfInput = userSelect[0].toLowerCase();
     const result = movies.filter((movie) => {
-      return movie.title[0].toLowerCase() === firstLetterOfInput;
+      return movie.title[0].toLowerCase().includes(userSelect.toLowerCase()); //compares the first letters of both
     });
     setMatchingMovie(result);
   }, [userSelect]);
