@@ -81,10 +81,11 @@ export default function MoodSelector() {
     setMovieList([]); // clear previous movies
     setLoading(true);
 
-    movieApi(moodName)
+    movieApi(moodName) //Api
       .then((movies) => {
+        //handling the promise
         setMovieList(movies);
-        setMatchingMovie(movies); // initially show all movies
+        setMatchingMovie(movies);
       })
       .finally(() => setLoading(false));
   }
@@ -123,10 +124,11 @@ export default function MoodSelector() {
           {matchingMovie.map((movie) => (
             <MovieItem key={movie.id}>
               <Image
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} //movie card graphics lol
                 alt={movie.title}
               />
               <p>{movie.title}</p>
+              <button>Add to Favorites</button>
             </MovieItem>
           ))}
         </MovieCard>
