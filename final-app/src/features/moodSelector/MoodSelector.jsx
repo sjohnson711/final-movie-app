@@ -95,12 +95,12 @@ export default function MoodSelector() {
     setUserSelect(value);
 
     if (value.trim() === "") {
-      setMatchingMovie(""); // No movies are shown at that time
+      setMatchingMovie(movieList); // No movies are shown at that time
     } else {
       const result = movieList.filter((movie) =>
         movie.title.toLowerCase().startsWith(value.toLowerCase())
       );
-      setMatchingMovie(result);
+      setMatchingMovie(result); //need to fix logic for the useSearch
     }
   }
 
@@ -136,7 +136,6 @@ export default function MoodSelector() {
         <EmptyState>No movies found</EmptyState>
       ) : null}
 
-      {/* Search Form */}
       <form>
         <Input
           name="user-input"

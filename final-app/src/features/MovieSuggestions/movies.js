@@ -82,14 +82,14 @@ export const movieApi = async (mood) => {
   ); // your actual API
   const data = await res.json();
 
-  // Example: map genres to moods
+  // filter through the data from Api
   return data.results.filter((movie) => {
     if (mood === "happy") return movie.genre_ids.includes(35); // comedy
-    if (mood === "sad") return movie.genre_ids.includes(18); // drama
+    if (mood === "sad") return movie.genre_ids.includes(878); // drama
     if (mood === "scared") return movie.genre_ids.includes(27); // horror
     if (mood === "excited") return movie.genre_ids.includes(28); // action
-    if (mood === "romantic") return movie.genre_ids.includes(10749); // romance
-    if (mood === "inspired") return movie.genre_ids.includes(99); // documentary / inspirational
+    if (mood === "romantic") return movie.genre_ids.includes(53); // romance
+    if (mood === "inspired") return movie.genre_ids.includes(80); // documentary / inspirational
     return true;
   });
 };
