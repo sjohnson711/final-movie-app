@@ -18,7 +18,7 @@ const Button = styled.button`
 
   &.selected {
     border-color: #ff9900;
-    background-color: teal;
+    background-color: rgb(204, 204, 255);
   }
 `;
 
