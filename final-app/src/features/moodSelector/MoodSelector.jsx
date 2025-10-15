@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import styled from "styled-components";
 import { moods } from "./MoodData";
-import { movies } from "../MovieSuggestions/movies";
+import { movieApi } from "../MovieSuggestions/movies";
 
 const Button = styled.button`
   margin: 5px;
@@ -68,99 +68,83 @@ const Input = styled.input`
 `;
 
 export default function MoodSelector() {
-  const [movieList, setMovieList] = useState([]); //receives the movie list
+  const [movieList, setMovieList] = useState([]);
   const [selectedMood, setSelectedMood] = useState(null);
   const [userSelect, setUserSelect] = useState("");
-  const [matchingMovie, setMatchingMovie] = useState(null);
-
-  console.log(userSelect);
+  const [matchingMovie, setMatchingMovie] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   function handleMoodClick(moodName) {
     setSelectedMood(moodName);
-    const filtered = movies.filter((movie) => movie.mood === moodName); //if movie mood matches the mood name display
-    setMovieList(filtered);
+    setUserSelect(""); // clear search
+    setMatchingMovie([]); // clear previous search
+    setMovieList([]); // clear previous movies
+    setLoading(true);
+
+    movieApi(moodName)
+      .then((movies) => {
+        setMovieList(movies);
+        setMatchingMovie(movies); // initially show all movies
+      })
+      .finally(() => setLoading(false));
   }
 
-  function handleOnchange(event) {
-    setUserSelect(event.target.value); //userinput
-  }
+  function handleInputChange(e) {
+    const value = e.target.value;
+    setUserSelect(value);
 
-  function onSubmit(event) {
-    //prevent refresh and also saved user input into state
-    event.preventDefault();
-    setUserSelect(userSelect);
-  }
-
-  useEffect(() => {
-    if (!userSelect) {
-      setMatchingMovie([]); //prevents error/edge case
-      return;
+    if (value.trim() === "") {
+      setMatchingMovie(""); // show all movies when input is empty
+    } else {
+      const result = movieList.filter((movie) =>
+        movie.title.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setMatchingMovie(result);
     }
-
-    const firstLetterOfInput = userSelect[0].toLowerCase();
-    const result = movies.filter((movie) => {
-      return movie.title[0].toLowerCase().includes(userSelect.toLowerCase()); //compares the first letters of both
-    });
-    setMatchingMovie(result);
-  }, [userSelect]);
+  }
 
   return (
     <div className="mood-container-button">
       <h2>Select Your Mood</h2>
-      {moods.map(
-        (
-          mood //maps the mood into buttons
-        ) => (
-          <Button
-            key={mood.id}
-            className={selectedMood === mood.name ? "selected" : ""}
-            onClick={() => handleMoodClick(mood.name)}
-          >
-            {mood.icon} {mood.name}
-          </Button>
-        )
-      )}
-      {/*If the movie list is < 0 it will display if not : 'message'*/}
-      {movieList.length > 0 && (
+      {moods.map((mood) => (
+        <Button
+          key={mood.id}
+          className={selectedMood === mood.name ? "selected" : ""}
+          onClick={() => handleMoodClick(mood.name)}
+        >
+          {mood.icon} {mood.name}
+        </Button>
+      ))}
+
+      {loading ? (
+        <EmptyState>Loading...</EmptyState>
+      ) : matchingMovie.length > 0 ? (
         <MovieCard>
-          {movieList.map((movie) => (
+          {matchingMovie.map((movie) => (
             <MovieItem key={movie.id}>
-              <Image src={movie.poster_path} alt={movie.title} />
+              <Image
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
+                alt={movie.title}
+              />
               <p>{movie.title}</p>
             </MovieItem>
           ))}
         </MovieCard>
-      )}
-      {movieList.length === 0 && <EmptyState>No movies Found</EmptyState>}
-      <form onSubmit={onSubmit}>
+      ) : selectedMood ? (
+        <EmptyState>No movies found</EmptyState>
+      ) : null}
+
+      {/* Search Form */}
+      <form>
         <Input
           name="user-input"
-          className="user=input"
           autoComplete="off"
           type="text"
           value={userSelect}
-          onChange={handleOnchange}
-          placeholder="search for movie..."
+          onChange={handleInputChange}
+          placeholder="Search for movie..."
         />
-        {/**disable button if nothing is in input */}
-        <span>
-          <button disabled={userSelect === "" ? true : false}>Search</button>
-        </span>
       </form>
-      {userSelect ? (
-        matchingMovie && matchingMovie.length > 0 ? ( //if movie matches first letter for both user input and movie display below:
-          <MovieCard>
-            {matchingMovie.map((movie) => (
-              <MovieItem key={movie.id}>
-                <Image src={movie.poster_path} alt={movie.title} />
-                <p>{movie.title}</p>
-              </MovieItem>
-            ))}
-          </MovieCard>
-        ) : (
-          <EmptyState>No movies found</EmptyState>
-        )
-      ) : null}
     </div>
   );
 }
