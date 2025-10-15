@@ -56,6 +56,8 @@
 //   },
 // ];
 
+//Api Data to filter the movies
+
 const moodGenres = {
   happy: 35,
   sad: 18,
