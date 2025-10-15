@@ -58,14 +58,14 @@
 
 //Api Data to filter the movies
 
-const moodGenres = {
-  happy: 35,
-  sad: 18,
-  scared: 27,
-  excited: 28,
-  romantic: 10749,
-  inspired: 12 || 14,
-};
+// const moodGenres = {
+//   happy: 35,
+//   sad: 18,
+//   scared: 27,
+//   excited: 28,
+//   romantic: 10749,
+//   inspired: 12 || 14,
+// };
 
 const options = {
   method: "GET",
@@ -84,12 +84,12 @@ export const movieApi = async (mood) => {
 
   // filter through the data from Api
   return data.results.filter((movie) => {
-    if (mood === "happy") return movie.genre_ids.includes(35); // comedy
-    if (mood === "sad") return movie.genre_ids.includes(878); // drama
-    if (mood === "scared") return movie.genre_ids.includes(27); // horror
-    if (mood === "excited") return movie.genre_ids.includes(28); // action
-    if (mood === "romantic") return movie.genre_ids.includes(53); // romance
-    if (mood === "inspired") return movie.genre_ids.includes(80); // documentary / inspirational
+    if (mood === "happy") return movie.genre_ids.includes(35);
+    if (mood === "sad") return movie.genre_ids.includes(878);
+    if (mood === "scared") return movie.genre_ids.includes(27);
+    if (mood === "excited") return movie.genre_ids.includes(28);
+    if (mood === "romantic") return movie.genre_ids.includes(53);
+    if (mood === "inspired") return movie.genre_ids.includes(80);
     return true;
   });
 };

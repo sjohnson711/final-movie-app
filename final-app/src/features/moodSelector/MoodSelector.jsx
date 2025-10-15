@@ -67,6 +67,19 @@ const Input = styled.input`
   }
 `;
 
+const Favorites = styled.button`
+  background-color: rgb(204, 204, 255);
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  border: none;
+
+  &:hover {
+    opacity: 0.8;
+  }
+`;
+
 export default function MoodSelector() {
   const [movieList, setMovieList] = useState([]);
   const [selectedMood, setSelectedMood] = useState(null);
@@ -95,7 +108,7 @@ export default function MoodSelector() {
     setUserSelect(value);
 
     if (value.trim() === "") {
-      setMatchingMovie(movieList); // No movies are shown at that time
+      setMatchingMovie(() => movieList); // No movies are shown at that time
     } else {
       const result = movieList.filter((movie) =>
         movie.title.toLowerCase().startsWith(value.toLowerCase())
@@ -128,7 +141,7 @@ export default function MoodSelector() {
                 alt={movie.title}
               />
               <p>{movie.title}</p>
-              <button>Add to Favorites</button>
+              <Favorites>Add to Favorites</Favorites>
             </MovieItem>
           ))}
         </MovieCard>
