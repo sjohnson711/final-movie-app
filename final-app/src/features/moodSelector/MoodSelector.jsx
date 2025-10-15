@@ -94,7 +94,7 @@ export default function MoodSelector() {
     setUserSelect(value);
 
     if (value.trim() === "") {
-      setMatchingMovie(""); // show all movies when input is empty
+      setMatchingMovie(""); // No movies are shown at that time
     } else {
       const result = movieList.filter((movie) =>
         movie.title.toLowerCase().startsWith(value.toLowerCase())
