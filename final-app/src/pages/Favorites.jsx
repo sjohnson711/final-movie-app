@@ -3,13 +3,7 @@ export default function Favorites() {
     <div className="favorites-header">
       <header>
         <nav>
-          <ul>
-            <li className="">Sad Movies</li>
-            <li className="">Excited Movies</li>
-            <li className="">Scared Movies</li>
-            <li className="">Excited Movies</li>
-            <li className="">Romantic Movies</li>
-          </ul>
+          <h1> ❤️ Your Favorite Movies ♥️</h1>
         </nav>
       </header>
     </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import { moods } from "./MoodData";
 import { movieApi } from "../MovieSuggestions/movies";
@@ -86,6 +86,36 @@ export default function MoodSelector() {
   const [userSelect, setUserSelect] = useState("");
   const [matchingMovie, setMatchingMovie] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      const saved = localStorage.getItem("favorites");
+      return saved ? JSON.parse({ saved }) : [];
+    } catch (error) {
+      console.error("there is an error", error);
+    }
+  });
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+    console.log("favorites updated", favorites);
+  }, [favorites]);
+
+  //add movie to favorites if it is already there!!!!
+  function addFavorites(movie) {
+    setFavorites((prev) => {
+      const alreadyExists = prev.some((m) => m.id === movie.id);
+      if (!alreadyExists) {
+        const fav = [...prev, movie];
+        console.log(fav);
+        return fav;
+      }
+      return prev;
+    });
+  }
+  localStorage.clear();
+
+  const removeFavorites = (id) => {
+    setFavorites((prev = prev.filter((m) => m.id !== id)));
+  };
 
   function handleMoodClick(moodName) {
     setSelectedMood(moodName);
@@ -141,7 +171,9 @@ export default function MoodSelector() {
                 alt={movie.title}
               />
               <p>{movie.title}</p>
-              <Favorites>Add to Favorites</Favorites>
+              <Favorites onClick={() => addFavorites(movie)}>
+                Add to Favorites
+              </Favorites>
             </MovieItem>
           ))}
         </MovieCard>
