@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { moods } from "./MoodData";
 import { movieApi } from "../MovieSuggestions/movies";
 import { FavoritesContext } from "../../App";
+import { ClipLoader } from "react-spinners";
 const Button = styled.button`
   margin: 5px;
   padding: 10px 20px;
@@ -119,6 +120,19 @@ export default function MoodSelector() {
       setMatchingMovie(result); //need to fix logic for the useSearch
     }
   }
+  const loadSpinner = () => {
+    return (
+      <div>
+        <ClipLoader
+          color="red"
+          loading={true}
+          size={150}
+          aria-label="Loading Spinner"
+          data-testid="loader"
+        />
+      </div>
+    );
+  };
 
   return (
     <div className="mood-container-button">
