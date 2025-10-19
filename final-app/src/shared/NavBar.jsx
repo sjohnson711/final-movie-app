@@ -14,6 +14,13 @@ const Nav = styled.nav`
   gap: 20px;
   display: flex;
   justify-content: space-evenly;
+  font-size: 22px;
+  width: auto;
+
+  :hover {
+    color: red;
+    font-weight: bold;
+  }
 
   a {
     text-decoration: none;

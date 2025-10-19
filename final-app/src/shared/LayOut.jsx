@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import styled from "styled-components";
+import { ClipLoader } from "react-spinners";
 
 const Body = styled.div`
   min-height: 100vh;
@@ -33,7 +34,7 @@ export default function LayOut() {
   return (
     <Body>
       <NavBar />
-      <h1 style={{ fontSize: "25px", textAlign: "center" }}>How are you</h1>
+
       <Main>
         <Outlet />
       </Main>

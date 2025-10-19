@@ -8,6 +8,9 @@ const Body = styled.body`
 export default function Home() {
   return (
     <div>
+      <h1 style={{ color: "rgb(204, 204, 255)" }}>
+        How ARE YOU FEELING TODAY?
+      </h1>
       <MoodSelector />
     </div>
   );

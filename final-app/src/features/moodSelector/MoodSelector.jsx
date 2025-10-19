@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext, useContext } from "react";
 import styled from "styled-components";
 import { moods } from "./MoodData";
 import { movieApi } from "../MovieSuggestions/movies";
-
+import { FavoritesContext } from "../../App";
 const Button = styled.button`
   margin: 5px;
   padding: 10px 20px;
@@ -81,42 +81,14 @@ const Favorites = styled.button`
 `;
 
 export default function MoodSelector() {
+  const { addFavorites } = useContext(FavoritesContext);
   const [movieList, setMovieList] = useState([]);
   const [selectedMood, setSelectedMood] = useState(null);
   const [userSelect, setUserSelect] = useState("");
   const [matchingMovie, setMatchingMovie] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [favorites, setFavorites] = useState(() => {
-    try {
-      const saved = localStorage.getItem("favorites");
-      return saved ? JSON.parse({ saved }) : [];
-    } catch (error) {
-      console.error("there is an error", error);
-    }
-  });
-  useEffect(() => {
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-    console.log("favorites updated", favorites);
-  }, [favorites]);
 
-  //add movie to favorites if it is already there!!!!
-  function addFavorites(movie) {
-    setFavorites((prev) => {
-      const alreadyExists = prev.some((m) => m.id === movie.id);
-      if (!alreadyExists) {
-        const fav = [...prev, movie];
-        console.log(fav);
-        return fav;
-      }
-      return prev;
-    });
-  }
-  localStorage.clear();
-
-  const removeFavorites = (id) => {
-    setFavorites((prev = prev.filter((m) => m.id !== id)));
-  };
-
+  //
   function handleMoodClick(moodName) {
     setSelectedMood(moodName);
     setUserSelect(""); // clear search
@@ -124,7 +96,7 @@ export default function MoodSelector() {
     setMovieList([]); // clear previous movies
     setLoading(true);
 
-    movieApi(moodName) //Api
+    movieApi(moodName) //Api mapping throught the Api
       .then((movies) => {
         //handling the promise
         setMovieList(movies);
@@ -134,6 +106,7 @@ export default function MoodSelector() {
   }
 
   function handleInputChange(e) {
+    //taking the for value
     const value = e.target.value;
     setUserSelect(value);
 
@@ -167,7 +140,7 @@ export default function MoodSelector() {
           {matchingMovie.map((movie) => (
             <MovieItem key={movie.id}>
               <Image
-                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`} //movie card graphics lol
+                src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}
                 alt={movie.title}
               />
               <p>{movie.title}</p>

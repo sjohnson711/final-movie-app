@@ -8,9 +8,5 @@ const FooterContainer = styled.div`
 `;
 
 export default function Footer() {
-  return (
-    <FooterContainer>
-      <h1>Hello</h1>
-    </FooterContainer>
-  );
+  return <FooterContainer></FooterContainer>;
 }
