@@ -1,11 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./App.css";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  NavLink,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import LayOut from "/src/shared/LayOut";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -26,7 +21,6 @@ function App() {
 
   useEffect(() => {
     localStorage.setItem("favorites", JSON.stringify(favorites));
-    console.log("favorites updated", favorites);
   }, [favorites]);
 
   function addFavorites(movie) {
