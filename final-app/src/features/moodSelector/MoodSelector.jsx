@@ -117,7 +117,7 @@ export default function MoodSelector() {
       const result = movieList.filter((movie) =>
         movie.title.toLowerCase().startsWith(value.toLowerCase())
       );
-      setMatchingMovie(result); //need to fix logic for the useSearch
+      setMatchingMovie(result);
     }
   }
   const loadSpinner = () => {
@@ -148,7 +148,7 @@ export default function MoodSelector() {
       ))}
 
       {loading ? (
-        <EmptyState>Loading...</EmptyState>
+        <EmptyState>{loadSpinner}</EmptyState>
       ) : matchingMovie.length > 0 ? (
         <MovieCard>
           {matchingMovie.map((movie) => (

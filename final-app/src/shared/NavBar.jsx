@@ -33,8 +33,8 @@ export default function NavBar() {
     <Header>
       <Nav>
         <Link to="/">Home</Link>
-        <Link to="/about">About</Link>
         <Link to="/favorites">Favorites</Link>
+        <Link to="/about">About</Link>
       </Nav>
     </Header>
   );
