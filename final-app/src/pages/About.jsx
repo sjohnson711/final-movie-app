@@ -15,6 +15,7 @@ const Abouts = styled.div`
   align-items: center;
   width: 600px;
   font-family: monospace;
+  flex: 1;
 
   & p {
     font-size: 22px;
