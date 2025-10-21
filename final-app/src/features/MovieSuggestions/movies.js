@@ -1,9 +1,10 @@
+const token = import.meta.env.VITE_AUTH_TOKEN;
+
 const options = {
   method: "GET",
   headers: {
     accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYmFhMzI1YTMxNGY1YWFkZDI0MjExOTQzNGI1YWRkYSIsIm5iZiI6MTc2MDQ4NTM4OC41MzMsInN1YiI6IjY4ZWVlMDBjYjQ5YzdkNjAzZThhMjEyNiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.td3uhZmK2z36eIo-bjC9DIxqP42N4vgrwMQ57JBRQs4",
+    Authorization: `Bearer ${token}`,
   },
 };
 export const movieApi = async (mood) => {
