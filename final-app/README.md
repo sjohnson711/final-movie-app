@@ -32,27 +32,30 @@ Before you begin, ensure you have the following installed:
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone <your-repo-url>
    cd movie-mood-selector
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Set up your TMDB API key**
-   
+
    Add your API key in the `movies.js` file
 
 4. **Start the development server**
+
    ```bash
    npm run dev
    ```
 
 5. **Open your browser**
-   
+
    Navigate to [http://localhost:5173](http://localhost:5173)
 
 ## 🎯 How It Works
@@ -75,17 +78,20 @@ App.jsx (Provider)
 ### Key Components
 
 #### App.jsx
+
 - Creates and provides `FavoritesContext`
 - Manages favorites state with localStorage persistence
 - Wraps all routes with the Context Provider
 
 #### MoodSelector.jsx
+
 - Consumes `addFavorites` from context
 - Handles mood selection and movie fetching
 - Displays movie cards with "Add to Favorites" buttons
 - Implements search functionality
 
 #### Favorites.jsx
+
 - Consumes `favorites` and `removeFavorites` from context
 - Displays all saved favorite movies
 - Allows users to remove movies from favorites
@@ -118,6 +124,7 @@ The app uses styled-components for modular, component-scoped styling:
 ## 🐛 Troubleshooting
 
 ### Favorites not showing up?
+
 - Make sure `FavoritesContext` is imported from `App.jsx`
 - Verify the Context Provider wraps your routes
 - Check that you're destructuring the context value:
@@ -126,6 +133,7 @@ The app uses styled-components for modular, component-scoped styling:
   ```
 
 ### Movies not loading?
+
 - Verify your TMDB API key is correct
 - Check the browser console for API errors
 - Ensure you have an active internet connection
@@ -142,4 +150,4 @@ This project was created as a capstone project for educational purposes.
 
 ## Contributing
 
-Contributions are welcome! 
+Contributions are welcome!
