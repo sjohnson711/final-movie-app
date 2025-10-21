@@ -1,4 +1,4 @@
-import { useState, useEffect, createContext, useContext } from "react";
+import { useState, useContext } from "react";
 import styled from "styled-components";
 import { moods } from "./MoodData";
 import { movieApi } from "../MovieSuggestions/movies";
